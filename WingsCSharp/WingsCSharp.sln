@@ -9,8 +9,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common", "Common\Common.shp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WingsCSharp.Test.Console", "WingsCSharp.Test.Console\WingsCSharp.Test.Console.csproj", "{C5C1BE7A-51B2-4F5D-AC63-C4FB81F51B62}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "WinCSharp", "WinCSharp\WinCSharp.shproj", "{3B1EF1A5-663B-4309-B69D-8F055A3998AC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		WinCSharp\WinCSharp.projitems*{3b1ef1a5-663b-4309-b69d-8f055a3998ac}*SharedItemsImports = 13
 		Common\Common.projitems*{b88b16b1-5d0d-4fbb-b37b-93a8195013c4}*SharedItemsImports = 13
 		Common\Common.projitems*{c5c1be7a-51b2-4f5d-ac63-c4fb81f51b62}*SharedItemsImports = 4
 	EndGlobalSection

@@ -5,32 +5,50 @@ using System;
 namespace GenOcean.Common
 {
     /// <summary>
-    /// 日志管理
+    /// 日志管理类
     /// </summary>
-    public class LoggerManager:SingletonManagerBase<LoggerManager>
+    public class LoggerManager: ManagerBase
     {
-
-        protected Action<string> _LogActionCallback = null;
+        public Action<string> LogActionCallback = null;
 
         /// <summary>
         /// 处理最终日志打印的逻辑
         /// </summary>
         /// <param name="info"></param>
-        protected virtual void LogInfoInstance(string info)
+        public virtual void LogInfo(string info)
         {
             try
             {
-                if(_LogActionCallback!=null && _LogActionCallback.Target!=null)
+                if (LogActionCallback != null && LogActionCallback.Target != null)
                 {
-                    _LogActionCallback(info);
+                    LogActionCallback(info);
                 }
-            }catch(Exception err)
+            }
+            catch (Exception err)
             {
                 Console.WriteLine($"{GetType().Name}.LogInfoInstance:{err.Message}");
-                _LogActionCallback = null;
+                LogActionCallback = null;
             }
         }
 
+        public virtual void RegisterCallback(Action<string> cb, bool isReplaceAll = false)
+        {
+            if (isReplaceAll)
+            {
+                LogActionCallback = cb;
+            }
+            else
+            {
+                LogActionCallback += cb;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 日志管理
+    /// </summary>
+    public class SingleLoggerManager:SingletonManagerBase<LoggerManager>
+    {
         /// <summary>
         /// 注册一个日志回调
         /// </summary>
@@ -38,14 +56,7 @@ namespace GenOcean.Common
         /// <param name="isReplaceAll"></param>
         public static void RegisterCallback(Action<string> cb,bool isReplaceAll = false)
         {
-            if(isReplaceAll)
-            {
-                Instance._LogActionCallback = cb;
-            }
-            else
-            {
-                Instance._LogActionCallback += cb;
-            }       
+            Instance.RegisterCallback(cb, isReplaceAll);
         }
 
         /// <summary>
@@ -54,7 +65,7 @@ namespace GenOcean.Common
         /// <param name="info"></param>
         public static void LogInfo(string info)
         {
-            Instance.LogInfoInstance(info);
+            Instance.LogInfo(info);
         }
 
         /// <summary>
@@ -63,7 +74,7 @@ namespace GenOcean.Common
         /// <param name="info"></param>
         public static void LogError(string info)
         {
-            Instance.LogInfoInstance(info);
+            Instance.LogInfo(info);
         }
     }
 }

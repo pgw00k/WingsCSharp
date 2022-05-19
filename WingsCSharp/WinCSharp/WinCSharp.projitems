@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>3b1ef1a5-663b-4309-b69d-8f055a3998ac</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>WinCSharp</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)WINAPI\Win32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WINAPI\Win32.Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WINAPI\Win32.Structs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinHelper\CaptureHolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinHelper\WinHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinHelper\WinHooker.cs" />
+  </ItemGroup>
+</Project>

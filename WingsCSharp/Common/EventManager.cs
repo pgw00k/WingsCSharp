@@ -38,11 +38,13 @@ namespace GenOcean.Common
         public List<BaseEvent> Events = new List<BaseEvent>();
     }
 
-    public class EventManager : SingletonManagerBase<EventManager>
+    public class EventManager:ManagerBase
     {
         #region Protected Fields
 
         protected Dictionary<int, EventListener> _EventListeners = new Dictionary<int, EventListener>();
+
+        protected object _LockObject = new object();
 
         #endregion --Protected Fields
 
@@ -54,55 +56,7 @@ namespace GenOcean.Common
         #endregion --Private Fields
 
         #region Public Methods
-
-        /// <summary>
-        /// 注册一个监听事件回调
-        /// </summary>
-        /// <param name="eid"></param>
-        /// <param name="cb"></param>
-        /// <param name="isSwallow"></param>
-        /// <param name="invokeCount">默认只触发一次，设置为 -1 时会无限触发</param>
-        public static int RegisterEventCallback(int eid, EventCallBack cb, bool isSwallow = false, int invokeCount = 1)
-        {
-            return Instance.RegisterEventCallbackInstance(eid, cb, isSwallow, invokeCount);
-        }
-
-        /// <summary>
-        /// 分发一个指定事件
-        /// </summary>
-        /// <param name="eid"></param>
-        /// <param name="edata"></param>
-        public static void DispatchEvent(int eid, object edata = null)
-        {
-            Instance.DispatchEventInstance(eid, edata);
-        }
-
-        /// <summary>
-        /// 清除部分有问题的回调
-        /// </summary>
-        public static void ClearNullEvent()
-        {
-            Instance.ClearNullEventInstance();
-        }
-
-        /// <summary>
-        /// 取消一个事件监听
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <param name="eid"></param>
-        public static void ReleaseEventCallback(int uid,int eid)
-        {
-            Instance.ReleaseEventCallbackInstance(uid,eid);
-        }
-
-        #endregion --Public Methods
-
-        #region Private Methods
-        #endregion --Public Methods
-
-        #region Protected Methods
-
-        protected virtual int RegisterEventCallbackInstance(int eid, EventCallBack cb, bool isSwallow = false, int invokeCount = 1)
+        public virtual int RegisterEventCallback(int eid, EventCallBack cb, bool isSwallow = false, int invokeCount = 1)
         {
             BaseEvent newEvent = new BaseEvent();
             newEvent.EventID = eid;
@@ -125,8 +79,7 @@ namespace GenOcean.Common
                 return newEvent.UID;
             }
         }
-
-        protected virtual bool ReleaseEventCallbackInstance(int uid,int eid)
+        public virtual bool ReleaseEventCallback(int uid, int eid)
         {
             lock (_LockObject)
             {
@@ -137,12 +90,12 @@ namespace GenOcean.Common
                     {
                         BaseEvent bEvent = el.Events.Find(newEvent => newEvent.UID == uid);
                         el.Events.Remove(bEvent);
-                        
+
                         return true;
                     }
                     catch (Exception err)
                     {
-                        LoggerManager.LogInfo($"Can not get {eid} with UID={uid}:{err.Message}");
+                        SingleLoggerManager.LogInfo($"Can not get {eid} with UID={uid}:{err.Message}");
                         return false;
                     }
                 }
@@ -150,8 +103,7 @@ namespace GenOcean.Common
                 return false;
             }
         }
-
-        protected virtual void DispatchEventInstance(int eid, object edata)
+        public virtual void DispatchEvent(int eid, object edata)
         {
             lock (_LockObject)
             {
@@ -167,7 +119,7 @@ namespace GenOcean.Common
                         {
                             if (e.InvokeCount > 0 || e.InvokeCount < 0)
                             {
-                                if(e.InvokeCount > 0)
+                                if (e.InvokeCount > 0)
                                 {
                                     e.InvokeCount--;
                                 }
@@ -182,7 +134,7 @@ namespace GenOcean.Common
                                     el.Events.RemoveAt(index);
                                 }
                                 index--;
-                                if(e.IsSwallow)
+                                if (e.IsSwallow)
                                 {
                                     break;
                                 }
@@ -191,25 +143,22 @@ namespace GenOcean.Common
                         catch (Exception err)
                         {
                             el.Events.RemoveAt(index);
-                            LoggerManager.LogInfo($"{GetType().Name}.InstanceDispatchEvent:{err.Message}");
+                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceDispatchEvent:{err.Message}");
                         }
                     }
                 }
             }
         }
-
-
-
-        protected virtual void ClearNullEventInstance()
+        public virtual void ClearNullEvent()
         {
             lock (_LockObject)
             {
-                foreach(var el in _EventListeners.Values)
+                foreach (var el in _EventListeners.Values)
                 {
                     int index = el.Events.Count;
                     index--;
                     while (index >= 0)
-                    {     
+                    {
                         try
                         {
                             BaseEvent e = el.Events[index];
@@ -221,7 +170,7 @@ namespace GenOcean.Common
                         catch (Exception err)
                         {
                             el.Events.RemoveAt(index);
-                            LoggerManager.LogInfo($"{GetType().Name}.InstanceClearNullEvent:{err.Message}");
+                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceClearNullEvent:{err.Message}");
                         }
 
                         index--;
@@ -231,7 +180,61 @@ namespace GenOcean.Common
             }
         }
 
+        #endregion --Public Methods
 
-#endregion --Protected Methods
+        #region Private Methods
+        #endregion --Public Methods
+
+        #region Protected Methods
+
+        #endregion --Protected Methods
+    }
+
+    /// <summary>
+    /// 时间管理器单例
+    /// </summary>
+    public class SingleEventManager : SingletonManagerBase<EventManager>
+    {
+
+        /// <summary>
+        /// 注册一个监听事件回调
+        /// </summary>
+        /// <param name="eid"></param>
+        /// <param name="cb"></param>
+        /// <param name="isSwallow"></param>
+        /// <param name="invokeCount">默认只触发一次，设置为 -1 时会无限触发</param>
+        public static int RegisterEventCallback(int eid, EventCallBack cb, bool isSwallow = false, int invokeCount = 1)
+        {
+            return Instance.RegisterEventCallback(eid, cb, isSwallow, invokeCount);
+        }
+
+        /// <summary>
+        /// 分发一个指定事件
+        /// </summary>
+        /// <param name="eid"></param>
+        /// <param name="edata"></param>
+        public static void DispatchEvent(int eid, object edata = null)
+        {
+            Instance.DispatchEvent(eid, edata);
+        }
+
+        /// <summary>
+        /// 清除部分有问题的回调
+        /// </summary>
+        public static void ClearNullEvent()
+        {
+            Instance.ClearNullEvent();
+        }
+
+        /// <summary>
+        /// 取消一个事件监听
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="eid"></param>
+        public static void ReleaseEventCallback(int uid, int eid)
+        {
+            Instance.ReleaseEventCallback(uid, eid);
+        }
+
     }
 }
