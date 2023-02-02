@@ -25,13 +25,14 @@ namespace GenOcean.Common
             for (int i = 0; i < count; i++)
             {
                 var arg = Arguments[i];
-                if(arg.StartsWith("-"))
+                if (arg.StartsWith("-"))
                 {
                     arg = arg.ToLower();
-                    if(OptionActions.TryGetValue(arg,out OptionAction act))
+                    if (OptionActions.TryGetValue(arg, out OptionAction act))
                     {
-                        i+=act.Invoke(this, arg, i);
-                    }else
+                        i += act.Invoke(this, arg, i);
+                    }
+                    else
                     {
                         Console.WriteLine($"Argument {arg} is not defined.");
                     }
