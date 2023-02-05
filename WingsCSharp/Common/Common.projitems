@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)EventManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoggerConsoleWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoggerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PoolManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SingletonManagerBase.cs" />
