@@ -45,10 +45,19 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.CodeGenerator\CodeGenerator.cs" />
+    <Compile Include="Test.CodeGenerator\GenTest.g.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WingsCSharp.Core\WingsCSharp.Core.csproj">
+      <Project>{67e415d6-ebdd-438c-b964-324258021eef}</Project>
+      <Name>WingsCSharp.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Common\Common.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

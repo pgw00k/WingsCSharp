@@ -47,7 +47,7 @@ namespace GenOcean.Common
     /// <summary>
     /// 日志管理
     /// </summary>
-    public class SingleLoggerManager:SingletonManagerBase<LoggerManager>
+    public class SingleLoggerManager<T>:SingletonManagerBase<T> where T: LoggerManager,new() 
     {
         /// <summary>
         /// 注册一个日志回调
@@ -77,4 +77,10 @@ namespace GenOcean.Common
             Instance.LogInfo(info);
         }
     }
+
+
+    public class SingleBaseLogger : SingleLoggerManager<LoggerManager>
+    {
+    }
+
 }
