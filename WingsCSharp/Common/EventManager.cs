@@ -114,9 +114,9 @@ namespace GenOcean.Common
                     index--;
                     while (index >= 0)
                     {
-                        BaseEvent e = el.Events[index];
                         try
                         {
+                            BaseEvent e = el.Events[index];
                             if (e.InvokeCount > 0 || e.InvokeCount < 0)
                             {
                                 if (e.InvokeCount > 0)
@@ -143,7 +143,7 @@ namespace GenOcean.Common
                         catch (Exception err)
                         {
                             el.Events.RemoveAt(index);
-                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceDispatchEvent:{err.Message}");
+                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceDispatchEvent: on {index} {err.Message}");
                         }
                     }
                 }
@@ -170,7 +170,7 @@ namespace GenOcean.Common
                         catch (Exception err)
                         {
                             el.Events.RemoveAt(index);
-                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceClearNullEvent:{err.Message}");
+                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceClearNullEvent: on {index} {err.Message}");
                         }
 
                         index--;
@@ -191,9 +191,9 @@ namespace GenOcean.Common
     }
 
     /// <summary>
-    /// 时间管理器单例
+    /// 事件管理器单例
     /// </summary>
-    public class SingleEventManager : SingletonManagerBase<EventManager>
+    public class SingleEventManager<T> : SingletonManagerBase<T> where T : EventManager,new()
     {
 
         /// <summary>
