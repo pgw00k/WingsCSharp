@@ -95,7 +95,7 @@ namespace GenOcean.Common
                     }
                     catch (Exception err)
                     {
-                        SingleLoggerManager.LogInfo($"Can not get {eid} with UID={uid}:{err.Message}");
+                        SingleBaseLogger.LogInfo($"Can not get {eid} with UID={uid}:{err.Message}");
                         return false;
                     }
                 }
@@ -143,7 +143,7 @@ namespace GenOcean.Common
                         catch (Exception err)
                         {
                             el.Events.RemoveAt(index);
-                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceDispatchEvent: on {index} {err.Message}");
+                            SingleBaseLogger.LogInfo($"{GetType().Name}.InstanceDispatchEvent: on {index} {err.Message}");
                         }
                     }
                 }
@@ -170,7 +170,7 @@ namespace GenOcean.Common
                         catch (Exception err)
                         {
                             el.Events.RemoveAt(index);
-                            SingleLoggerManager.LogInfo($"{GetType().Name}.InstanceClearNullEvent: on {index} {err.Message}");
+                            SingleBaseLogger.LogInfo($"{GetType().Name}.InstanceClearNullEvent: on {index} {err.Message}");
                         }
 
                         index--;
