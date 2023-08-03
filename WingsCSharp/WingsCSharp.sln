@@ -15,6 +15,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ConsoleHelper", "ConsoleHel
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CodeGenerator", "CodeGenerator\CodeGenerator.shproj", "{EFBADF74-2CA1-4DBD-AB5D-2363A24D4697}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NetExtension", "NetExtension\NetExtension.shproj", "{24863C78-409D-4338-B828-19B6DF3C5430}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +39,12 @@ Global
 		SolutionGuid = {78C146C0-7894-46FC-83AC-093F37A1EE55}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NetExtension\NetExtension.projitems*{24863c78-409d-4338-b828-19b6df3c5430}*SharedItemsImports = 13
 		WinCSharp\WinCSharp.projitems*{3b1ef1a5-663b-4309-b69d-8f055a3998ac}*SharedItemsImports = 13
 		CodeGenerator\CodeGenerator.projitems*{67e415d6-ebdd-438c-b964-324258021eef}*SharedItemsImports = 4
 		Common\Common.projitems*{b88b16b1-5d0d-4fbb-b37b-93a8195013c4}*SharedItemsImports = 13
 		Common\Common.projitems*{c5c1be7a-51b2-4f5d-ac63-c4fb81f51b62}*SharedItemsImports = 4
+		NetExtension\NetExtension.projitems*{c5c1be7a-51b2-4f5d-ac63-c4fb81f51b62}*SharedItemsImports = 4
 		ConsoleHelper\ConsoleHelper.projitems*{cc4b427b-870b-4475-9d46-849a748a4ae1}*SharedItemsImports = 13
 		CodeGenerator\CodeGenerator.projitems*{efbadf74-2ca1-4dbd-ab5d-2363a24d4697}*SharedItemsImports = 13
 	EndGlobalSection

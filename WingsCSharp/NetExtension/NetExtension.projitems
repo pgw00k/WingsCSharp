@@ -9,5 +9,7 @@
     <Import_RootNamespace>NetExtension</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)HttpDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RequestExtension.cs" />
   </ItemGroup>
 </Project>
