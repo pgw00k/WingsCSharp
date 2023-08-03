@@ -18,18 +18,22 @@ namespace GenOcean.Common
         //public IPoolObject CreateNewPoolObject();
     }
 
+    public interface IActiveAble
+    {
+        bool IsActive { get; }
+        void Active();
+        void Deactive();
+    }
+
     public interface IPoolManager<T>: IPoolManager
     {
         T Get();
         T CreateNewPoolObject();
     }
 
-    public interface IPoolObject
+    public interface IPoolObject:IActiveAble
     {
         IPoolManager Pool { get; set; }
-        void Active();
-        void Deactive();
-        bool IsActive { get; }
     }
 
     public class PoolManager<T> : IPoolManager<T>
