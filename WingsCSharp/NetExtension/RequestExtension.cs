@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
 
 namespace System.Net
@@ -10,11 +11,10 @@ namespace System.Net
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (string headerKey in request.Headers.AllKeys)
+            foreach (string key in request.Headers.AllKeys)
             {
-                sb.AppendLine($"{headerKey}:{request.Headers[headerKey]}");
+                sb.AppendLine($"{key}:{request.Headers[key]}");
             }
-
             return sb.ToString();
         }
     }

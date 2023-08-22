@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)HttpDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NameValueCollectionExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RequestExtension.cs" />
   </ItemGroup>
 </Project>
