@@ -48,7 +48,7 @@ namespace GenOcean.Code
             {
                 return false;
             }
-            return other.Name.Equals(Name);
+            return string.Equals(Name,other.Name);
         }
         public override int GetHashCode()
         {
@@ -83,6 +83,12 @@ namespace GenOcean.Code
             }
 
             return finalComment;
+        }
+
+        public override string ToString()
+        {
+            string finalComment = GetComment();
+            return $"{finalComment}{Level} {Type} {Name} {DefaultValue};";
         }
     }
 
@@ -127,7 +133,7 @@ namespace GenOcean.Code
         public override string ToString()
         {
             string finalComment = GetComment();
-            return $"{finalComment}{Level} {Type} {Name} {DefaultValue};";
+            return $"{finalComment}{Level} {Type} {Name} {DefaultValue}";
         }
     }
 

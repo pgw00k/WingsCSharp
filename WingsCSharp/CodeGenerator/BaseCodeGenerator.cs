@@ -21,7 +21,7 @@ namespace GenOcean.Code
         #region Class Basic Info
         public HashSet<string> UseNamespaces = new HashSet<string>();
         public string Namespace = string.Empty;
-        public string ClassLevel = "public";
+        public string ClassLevel = "public class";
         public string ClassName = "Class1";
         public string ParentClassName = string.Empty;
         public HashSet<string> Interfaces = new HashSet<string>();
@@ -72,7 +72,7 @@ namespace GenOcean.Code
             {
                 _Writer.WriteLine($"namespace {Namespace} {{");
             }
-            _Writer.Write($"{ClassLevel} class {ClassName} ");
+            _Writer.Write($"{ClassLevel} {ClassName} ");
             if(!string.IsNullOrEmpty(ParentClassName) || Interfaces.Count > 0)
             {
                 _Writer.Write($":");

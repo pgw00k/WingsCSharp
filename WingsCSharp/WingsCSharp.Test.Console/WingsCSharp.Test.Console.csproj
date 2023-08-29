@@ -60,5 +60,6 @@
   <ItemGroup />
   <Import Project="..\Common\Common.projitems" Label="Shared" />
   <Import Project="..\NetExtension\NetExtension.projitems" Label="Shared" />
+  <Import Project="..\StringExtension\StringExtension.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
