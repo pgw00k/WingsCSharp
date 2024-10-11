@@ -19,6 +19,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NetExtension", "NetExtensio
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StringExtension", "StringExtension\StringExtension.shproj", "{E0072AE9-356E-407B-A7C0-C4D01CD3C4CE}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StreamExtension", "StreamExtension\StreamExtension.shproj", "{81BCC83C-B0C1-4A9C-A1B7-5F876191F09A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,7 @@ Global
 		NetExtension\NetExtension.projitems*{24863c78-409d-4338-b828-19b6df3c5430}*SharedItemsImports = 13
 		WinCSharp\WinCSharp.projitems*{3b1ef1a5-663b-4309-b69d-8f055a3998ac}*SharedItemsImports = 13
 		CodeGenerator\CodeGenerator.projitems*{67e415d6-ebdd-438c-b964-324258021eef}*SharedItemsImports = 4
+		StreamExtension\StreamExtension.projitems*{81bcc83c-b0c1-4a9c-a1b7-5f876191f09a}*SharedItemsImports = 13
 		Common\Common.projitems*{b88b16b1-5d0d-4fbb-b37b-93a8195013c4}*SharedItemsImports = 13
 		Common\Common.projitems*{c5c1be7a-51b2-4f5d-ac63-c4fb81f51b62}*SharedItemsImports = 4
 		NetExtension\NetExtension.projitems*{c5c1be7a-51b2-4f5d-ac63-c4fb81f51b62}*SharedItemsImports = 4
