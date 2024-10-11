@@ -10,7 +10,7 @@ namespace WINAPI
 {
 
 
-    public class Win32
+    public partial class Win32
     {
 
         #region User32.dll
